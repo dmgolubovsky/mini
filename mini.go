@@ -324,6 +324,21 @@ func getFloats(values map[string]interface{}, key string) []float64 {
 }
 
 /*
+SectionNames extracts names of all configuration sections that Config
+currently contains.
+*/
+func (config *Config) SectionNames() []string {
+	keys := []string{}
+	if len(config.name) > 0 {
+		keys = append(keys, config.name)
+	}
+	for k := range config.sections {
+		keys = append(keys, k)
+	}
+	return keys
+}
+
+/*
 String looks for the specified key and returns it as a string. If not found the default value def is returned.
 */
 func (config *Config) String(key string, def string) string {
